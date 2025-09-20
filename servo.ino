@@ -9,6 +9,7 @@ const char* password = "";
 
 const char* mqtt_server = "broker.hivemq.com";
 const char* topic = "";
+// -------
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -34,7 +35,7 @@ void setup() {
     client.subscribe(topic);
     client.setCallback(callback);
     Serial.println("Conectado! MQTT");
-    resetServo();
+    initServo();
   } else {
     Serial.print("Falha na conexão, estado = ");
     Serial.println(client.state());
@@ -62,4 +63,12 @@ void startMotor(int angle) {
 
 void resetServo(){
   Servo.write(0);
+}
+
+void initServo(){
+  Servo.write(180);
+  delay(2000);
+  Servo.write(90);
+  delay(2000);
+  resetServo();
 }
