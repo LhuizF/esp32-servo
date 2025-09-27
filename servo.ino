@@ -56,6 +56,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
 }
 
 void startMotor(int angle) {
+  if (angle > 90) {
+    angle = 90;
+  }
+
   Servo.write(angle);
   delay(2000);
   resetServo();
@@ -66,8 +70,6 @@ void resetServo(){
 }
 
 void initServo(){
-  Servo.write(180);
-  delay(2000);
   Servo.write(90);
   delay(2000);
   resetServo();
